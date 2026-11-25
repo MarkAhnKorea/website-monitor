@@ -47,6 +47,7 @@ frequency = int(input("How often would you like to check the website for changes
 while True:
     try:
         response = requests.get("https://www." + website, timeout=10)
+        response.raise_for_status()
         current_hash = hashlib.md5(response.content).hexdigest()
         if previous_hash is None:
             previous_hash = current_hash
